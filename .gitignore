@@ -1,14 +1,14 @@
-cmd
+# cmd
 _examples
 _examples/*
 _examples/**
 *.db
 .drone.yml
-cmd
+# cmd
 plugin
 shared
-model
-config
+# model
+# config
 
 ### Go ###
 # Binaries for programs and plugins
