@@ -96,7 +96,7 @@ var RootCmd = &cobra.Command{
 		initializeExtraSiteData()
 
 		if options.WithAdmin {
-			DB, _ = gorm.Open("sqlite3", "investigo.db")
+			DB, _ = gorm.Open("sqlite3", "data/storage/sqlite3/investigo.db")
 			DB.AutoMigrate(&model.Result{})
 			// Initalize
 			Admin = admin.New(&admin.AdminConfig{DB: DB})
