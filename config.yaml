@@ -1,13 +1,14 @@
 ---
-appname: test
+appname: investigo
 db:
     dialect:  sqlite3
-    name:     test
-    user:     test
-    password: test
-    port:     1234
+    name:     investigo
+    user:     investigo
+    password: investigo
+    port:     3306
 with_tor: true 
 with_web: true 
+with_debug: true 
 contacts:
-- name: i test
-  email: test@test.com
+- name: xavier investigo
+  email: investigo@investigo.com
