@@ -16,6 +16,7 @@ type Options struct {
 	WithTorAddress  string
 	WithAdmin       bool
 	WithExport      string
+	WithFormatAll   bool
 	WithFormat      string
 	Verbose         bool
 	CheckForUpdate  bool

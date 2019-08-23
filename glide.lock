@@ -1,0 +1,110 @@
+hash: 57a058873ef964cb5907401e2f118a080066130bfb919ace7db509048e8a3838
+updated: 2019-08-23T13:57:52.79253+02:00
+imports:
+- name: github.com/agrison/go-tablib
+  version: 4930582c22eec7bfc0e5b47e0246d5048a78fe49
+- name: github.com/agrison/mxj
+  version: 1269f8afb3b42d0e7b9cf60041e8e187727c88d6
+- name: github.com/asaskevich/govalidator
+  version: f61b66f89f4a311bef65f13e575bcf1a2ffadda6
+- name: github.com/bndr/gotabulate
+  version: bc555436bfd5d4e93a2dd35b462ce37e067afdda
+- name: github.com/cep21/xdgbasedir
+  version: 21470bfc93b9903bce0beaebb037b1d04d0be523
+- name: github.com/chris-ramon/douceur
+  version: f3463056cd52886eda904655e1940157bf323bd7
+  subpackages:
+  - css
+  - parser
+- name: github.com/fatih/color
+  version: 3f9d52f7176a6927daacff70a3e8d1dc2025c53e
+- name: github.com/fatih/structs
+  version: 878a968ab22548362a09bdb3322f98b00f470d46
+- name: github.com/gorilla/context
+  version: 8559d4a6b87e4f517ec1846eb90a192b8748cc89
+- name: github.com/gorilla/css
+  version: 4940b8d7810384b58c15dbf1103a148fdf0761f2
+  subpackages:
+  - scanner
+- name: github.com/gorilla/securecookie
+  version: 86450627d8e6b88e00ea41f228489b89d08a40de
+- name: github.com/gorilla/sessions
+  version: 9c6b24ee2dee928836dbf71f18bb0c7d0da4bf85
+- name: github.com/gosimple/slug
+  version: 984b6d1a0ae5d1ecf6d718f4e990883d281ba3b8
+- name: github.com/inconshreveable/mousetrap
+  version: 76626ae9c91c4f2a10f34cad8ce83ea42c93bb75
+- name: github.com/jinzhu/gorm
+  version: 836fb2c19d84dac7b0272958dfb9af7cf0d0ade4
+- name: github.com/jinzhu/inflection
+  version: f5c5f50e6090ae76a29240b61ae2a90dd810112e
+- name: github.com/jinzhu/now
+  version: 1a6fdd4591d336a897120c50c69ed3c0e8033468
+- name: github.com/k0kubun/pp
+  version: b20d3da80efaecd224c0a49b0f5594444128f1a0
+- name: github.com/kamilsk/breaker
+  version: 6d408dfb4ec5a600103748cdb8a1a46b3d3ee674
+- name: github.com/kamilsk/retry
+  version: 5b03611f5cfed449867322693944c4cfa1714f8f
+  subpackages:
+  - strategy
+- name: github.com/konsorten/go-windows-terminal-sequences
+  version: f55edac94c9bbba5d6182a4be46d86a2c9b5b50e
+- name: github.com/mattn/go-colorable
+  version: 388941e3ea99c461d2bc2747eaf27741b6dda096
+- name: github.com/mattn/go-isatty
+  version: bf9a1dea1961e1d831824fb135332bfb8c10e8b8
+- name: github.com/mattn/go-runewidth
+  version: 703b5e6b11ae25aeb2af9ebb5d5fdf8fa2575211
+- name: github.com/mattn/go-sqlite3
+  version: d3c690956bde8789300d0dd7e868189cb88cf6ad
+- name: github.com/microcosm-cc/bluemonday
+  version: d9ddfeccb93d4506ae8257aa13026c695552686c
+- name: github.com/qor/admin
+  version: 8ecf009adc826c606b048e5c0750eb3523dd7c5d
+- name: github.com/qor/assetfs
+  version: ff57fdc13a148d39c3e930cb27c7eaf82e376891
+- name: github.com/qor/middlewares
+  version: 781378b69454a545d08058d8154aca40d079e7ab
+- name: github.com/qor/qor
+  version: 186b0237364b23ebbe564d0764c5b8523c953575
+  subpackages:
+  - resource
+  - utils
+- name: github.com/qor/responder
+  version: b6def473574f621fee316696ad120d4fbf470826
+- name: github.com/qor/roles
+  version: d6375609fe3e5da46ad3a574fae244fb633e79c1
+- name: github.com/qor/session
+  version: 8206b0adab706a6ef3ee6fabba2584d34429a26a
+  subpackages:
+  - gorilla
+  - manager
+- name: github.com/qor/validations
+  version: f364bca61b46bd48a5e32552a37758864fdf005d
+- name: github.com/rainycape/unidecode
+  version: cb7f23ec59bec0d61b19c56cd88cee3d0cc1870c
+- name: github.com/Sirupsen/logrus
+  version: de736cf91b921d56253b4010270681d33fdf7cb5
+- name: github.com/spf13/cobra
+  version: b80588d523ec50c7fee20218426cf2ff70920f06
+- name: github.com/spf13/pflag
+  version: 972238283c0625cf3e881de7699ba8f2524c340a
+- name: github.com/tealeg/xlsx
+  version: a6243d92b3699a06d678109bc19b1529b3f84aba
+- name: github.com/theplant/cldr
+  version: 9f76f7ce4ee8058b01f92739cf0d0cceaeda3cb2
+- name: golang.org/x/net
+  version: 74dc4d7220e7acc4e100824340f3e66577424772
+  subpackages:
+  - html
+  - html/atom
+  - internal/socks
+  - proxy
+- name: golang.org/x/sys
+  version: fde4db37ae7ad8191b03d30d27f258b5291ae4e3
+  subpackages:
+  - unix
+- name: gopkg.in/yaml.v2
+  version: 51d6538a90f86fe93ac480b35f37b2be17fef232
+testImports: []

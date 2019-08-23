@@ -5,6 +5,8 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"path/filepath"
+	"strings"
 	"sync"
 
 	"github.com/agrison/go-tablib"
@@ -45,6 +47,29 @@ var (
 	}
 )
 
+/*
+	// If no filename given as argument, read from stdin. Allows use as piped tool.
+	flag.Parse()
+	var data []byte
+	var err error
+	switch flag.NArg() {
+	case 0:
+		data, err = ioutil.ReadAll(os.Stdin)
+		check(err)
+		fmt.Printf("stdin data: %v\n", string(data))
+		break
+	case 1:
+		data, err = ioutil.ReadFile(flag.Arg(0))
+		check(err)
+		fmt.Printf("file data: %v\n", string(data))
+		break
+	default:
+		fmt.Printf("input must be from stdin or file\n")
+		os.Exit(1)
+	}
+
+*/
+
 // RootCmd is the root command for limo
 var RootCmd = &cobra.Command{
 	Use:     "investigo",
@@ -52,6 +77,10 @@ var RootCmd = &cobra.Command{
 	Long:    `investigo.`,
 	Version: config.Version,
 	Run: func(cmd *cobra.Command, args []string) {
+
+		// https://gist.github.com/mashbridge/4365101
+		// pipe... cf upper
+
 		if len(args) > 0 {
 			// query := args[0]
 			// pp.Println("usernames: ", query)
@@ -119,10 +148,95 @@ var RootCmd = &cobra.Command{
 		if options.WithExport != "" {
 			// fmt.Println(DBook.YAML())
 			for name := range DBook.Sheets() {
-				ods := DBook.Sheet(name).Dataset().Tabular("grid" /* tablib.TabularMarkdown */)
-				fmt.Println(ods)
-				// save to file
+				prefixPath := filepath.Join("data", name)
+				err := os.MkdirAll(prefixPath, 0700)
+				if err != nil {
+					return
+				}
+
+				var ods *tablib.Exportable
+				// var err error
+				ds := DBook.Sheet(name).Dataset()
+				var validOutput bool
+				if options.WithFormat == "all" {
+					options.WithFormat = "json,yaml,xml,xlsx,csv,tsv,html,tabularmarkdown,tabulargrid,tabularcondensed,tabularsimple,postgres,mysql"
+				}
+				// pp.Println("options.WithFormat", options.WithFormat)
+				formats := strings.Split(options.WithFormat, ",")
+				for _, format := range formats {
+					// format := strings.ToLower(options.WithFormat)
+					outputFile := name + "." + format
+					if strings.HasPrefix(format, "tabular") {
+						outputFile = name + "." + strings.ToLower(format) + ".md"
+					}
+					outputPath := filepath.Join(prefixPath, outputFile)
+					// pp.Println("prefixPath:", prefixPath)
+					// pp.Println("format:", format)
+					// pp.Println("outputPath:", outputPath)
+					switch strings.ToLower(format) {
+					// missing: csv, tsv, XLSXL, html
+					case "yaml":
+						ods, err = ds.YAML()
+						if err != nil {
+							continue
+						}
+						validOutput = true
+					case "json":
+						ods, err = ds.JSON()
+						if err != nil {
+							continue
+						}
+						validOutput = true
+					case "xml":
+						ods, err = ds.XML()
+						if err != nil {
+							continue
+						}
+						validOutput = true
+					case "xlsx":
+						ods, err = ds.XLSX()
+						if err != nil {
+							continue
+						}
+					case "csv":
+						ods, err = ds.CSV()
+						if err != nil {
+							continue
+						}
+					case "tsv":
+						ods, err = ds.TSV()
+						if err != nil {
+							continue
+						}
+					case "html":
+						ods = ds.HTML()
+						validOutput = true
+
+					case "tabularmarkdown":
+						ods = ds.Tabular("markdown" /* tablib.TabularMarkdown */)
+						validOutput = true
+					case "tabulargrid":
+						ods = ds.Tabular("grid" /* tablib.TabularMarkdown */)
+						validOutput = true
+					case "tabularcondensed":
+						ods = ds.Tabular("condensed" /* tablib.TabularMarkdown */)
+						validOutput = true
+					case "tabularsimple":
+						ods = ds.Tabular("simple" /* tablib.TabularMarkdown */)
+						validOutput = true
+					case "mysql":
+						ods = ds.MySQL("investigo")
+						validOutput = true
+					case "postgres":
+						ods = ds.Postgres("investigo")
+						validOutput = true
+					}
+					if validOutput {
+						ods.WriteFile(outputPath, 0600)
+					}
+				}
 			}
+
 		}
 		if options.WithAdmin {
 			// initalize an HTTP request multiplexer
@@ -136,6 +250,18 @@ var RootCmd = &cobra.Command{
 
 	},
 }
+
+/*
+func WriteToFile(filepath, filename, format, data string) error {
+	err := os.MkdirAll(filepath, 0700)
+	if err != nil {
+		return err
+	}
+	outputFile := fmt.Printf("%s.%s", filename, format)
+	ioutil.WriteFile(outputFile, data, 0600)
+	return nil
+}
+*/
 
 // WriteResult writes investigation result to stdout and file
 func WriteResult(result model.Result) {
@@ -202,10 +328,11 @@ func getContent(url string) string {
 func init() {
 	flags := RootCmd.PersistentFlags()
 	flags.BoolVarP(&options.NoColor, "no-color", "n", false, "no color")
-	flags.BoolVarP(&options.WithTor, "tor", "t", false, "use tor proxy")
-	flags.StringVarP(&options.WithTorAddress, "tor-address", "p", "", "use tor proxy")
-	flags.StringVarP(&options.WithExport, "export", "e", "exportfile", "export file base name")
-	flags.StringVarP(&options.WithFormat, "format", "f", "yaml", "export format (available: JSON, YAML, CSV, TSV, XLSX, Markdown, Postgres, MySQL.")
+	flags.BoolVarP(&options.WithTor, "tor", "t", false, "use tor as a proxy")
+	flags.StringVarP(&options.WithTorAddress, "tor-address", "p", "", "tor proxy address")
+	flags.StringVarP(&options.WithExport, "export", "e", "data/{username}", "export file base name")
+	flags.StringVarP(&options.WithFormat, "format", "f", "yaml", "export format (available: JSON, YAML, CSV, TSV, XLSX, Postgres, MySQL, TabularMarkdown, TabularGrid, TabularSimple, TabularCondensed.")
+	flags.BoolVarP(&options.WithFormatAll, "format-all", "a", false, "export to all available formats.")
 	flags.BoolVarP(&options.WithAdmin, "webui", "i", false, "webui interface")
 	flags.BoolVarP(&options.CheckForUpdate, "update", "u", false, "check for updates")
 	flags.BoolVarP(&options.Verbose, "verbose", "v", false, "verbose output")
