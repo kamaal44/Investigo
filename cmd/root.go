@@ -78,6 +78,7 @@ var RootCmd = &cobra.Command{
 	Version: config.Version,
 	Run: func(cmd *cobra.Command, args []string) {
 
+		// cat accounts.txt | go run main.go -t -f all
 		// https://gist.github.com/mashbridge/4365101
 		// pipe... cf upper
 
@@ -148,7 +149,7 @@ var RootCmd = &cobra.Command{
 		if options.WithExport != "" {
 			// fmt.Println(DBook.YAML())
 			for name := range DBook.Sheets() {
-				prefixPath := filepath.Join("data", name)
+				prefixPath := filepath.Join("data", "collector", name)
 				err := os.MkdirAll(prefixPath, 0700)
 				if err != nil {
 					return
@@ -333,6 +334,7 @@ func init() {
 	flags.StringVarP(&options.WithExport, "export", "e", "data/{username}", "export file base name")
 	flags.StringVarP(&options.WithFormat, "format", "f", "yaml", "export format (available: JSON, YAML, CSV, TSV, XLSX, Postgres, MySQL, TabularMarkdown, TabularGrid, TabularSimple, TabularCondensed.")
 	flags.BoolVarP(&options.WithFormatAll, "format-all", "a", false, "export to all available formats.")
+	flags.BoolVarP(&options.WithHttpCache, "cache", "c", false, "use http cache module")
 	flags.BoolVarP(&options.WithAdmin, "webui", "i", false, "webui interface")
 	flags.BoolVarP(&options.CheckForUpdate, "update", "u", false, "check for updates")
 	flags.BoolVarP(&options.Verbose, "verbose", "v", false, "verbose output")

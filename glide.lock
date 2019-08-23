@@ -1,5 +1,5 @@
-hash: 57a058873ef964cb5907401e2f118a080066130bfb919ace7db509048e8a3838
-updated: 2019-08-23T13:57:52.79253+02:00
+hash: 9c0bc784dc830b13485d16b40725960e5d31c2aa16aff1ad1974dfd8eaf03f0a
+updated: 2019-08-23T16:09:53.95462+02:00
 imports:
 - name: github.com/agrison/go-tablib
   version: 4930582c22eec7bfc0e5b47e0246d5048a78fe49
@@ -20,6 +20,8 @@ imports:
   version: 3f9d52f7176a6927daacff70a3e8d1dc2025c53e
 - name: github.com/fatih/structs
   version: 878a968ab22548362a09bdb3322f98b00f470d46
+- name: github.com/google/btree
+  version: 20236160a414454a9c64b6c8829381c6f4bddcaa
 - name: github.com/gorilla/context
   version: 8559d4a6b87e4f517ec1846eb90a192b8748cc89
 - name: github.com/gorilla/css
@@ -32,6 +34,10 @@ imports:
   version: 9c6b24ee2dee928836dbf71f18bb0c7d0da4bf85
 - name: github.com/gosimple/slug
   version: 984b6d1a0ae5d1ecf6d718f4e990883d281ba3b8
+- name: github.com/gregjones/httpcache
+  version: 901d90724c7919163f472a9812253fb26761123d
+  subpackages:
+  - diskcache
 - name: github.com/inconshreveable/mousetrap
   version: 76626ae9c91c4f2a10f34cad8ce83ea42c93bb75
 - name: github.com/jinzhu/gorm
@@ -60,6 +66,8 @@ imports:
   version: d3c690956bde8789300d0dd7e868189cb88cf6ad
 - name: github.com/microcosm-cc/bluemonday
   version: d9ddfeccb93d4506ae8257aa13026c695552686c
+- name: github.com/peterbourgon/diskv
+  version: 0be1b92a6df0e4f5cb0a5d15fb7f643d0ad93ce6
 - name: github.com/qor/admin
   version: 8ecf009adc826c606b048e5c0750eb3523dd7c5d
 - name: github.com/qor/assetfs

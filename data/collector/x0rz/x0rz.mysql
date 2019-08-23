@@ -1,0 +1,55 @@
+CREATE TABLE IF NOT EXISTS investigo
+(
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	Status VARCHAR(0),
+	Username VARCHAR(4),
+	Site VARCHAR(28),
+	Info VARCHAR(0),
+	RequestIP VARCHAR(14)
+);
+
+INSERT INTO investigo VALUES(1, 'true', 'x0rz', 'DailyMotion', '', '82.228.195.193');
+INSERT INTO investigo VALUES(2, 'true', 'x0rz', 'Imgur', '', '82.228.195.193');
+INSERT INTO investigo VALUES(3, 'true', 'x0rz', 'Pastebin', '', '82.228.195.193');
+INSERT INTO investigo VALUES(4, 'true', 'x0rz', 'Trello', '', '82.228.195.193');
+INSERT INTO investigo VALUES(5, 'true', 'x0rz', 'Kik', '', '82.228.195.193');
+INSERT INTO investigo VALUES(6, 'true', 'x0rz', 'BitBucket', '', '82.228.195.193');
+INSERT INTO investigo VALUES(7, 'true', 'x0rz', 'Ebay', '', '82.228.195.193');
+INSERT INTO investigo VALUES(8, 'true', 'x0rz', 'Scratch', '', '82.228.195.193');
+INSERT INTO investigo VALUES(9, 'true', 'x0rz', 'PayPal', '', '82.228.195.193');
+INSERT INTO investigo VALUES(10, 'true', 'x0rz', 'MyAnimeList', '', '82.228.195.193');
+INSERT INTO investigo VALUES(11, 'true', 'x0rz', 'Scribd', '', '82.228.195.193');
+INSERT INTO investigo VALUES(12, 'true', 'x0rz', 'Behance', '', '82.228.195.193');
+INSERT INTO investigo VALUES(13, 'true', 'x0rz', 'LiveJournal', '', '82.228.195.193');
+INSERT INTO investigo VALUES(14, 'true', 'x0rz', 'Kongregate', '', '82.228.195.193');
+INSERT INTO investigo VALUES(15, 'true', 'x0rz', 'Bandcamp', '', '82.228.195.193');
+INSERT INTO investigo VALUES(16, 'true', 'x0rz', 'GitHub', '', '82.228.195.193');
+INSERT INTO investigo VALUES(17, 'true', 'x0rz', 'Gravatar', '', '82.228.195.193');
+INSERT INTO investigo VALUES(18, 'true', 'x0rz', 'Zhihu', '', '82.228.195.193');
+INSERT INTO investigo VALUES(19, 'true', 'x0rz', 'Medium', '', '82.228.195.193');
+INSERT INTO investigo VALUES(20, 'true', 'x0rz', 'Keybase', '', '82.228.195.193');
+INSERT INTO investigo VALUES(21, 'true', 'x0rz', 'NameMC (Minecraft.net skins)', '', '82.228.195.193');
+INSERT INTO investigo VALUES(22, 'true', 'x0rz', 'Steam', '', '82.228.195.193');
+INSERT INTO investigo VALUES(23, 'true', 'x0rz', 'Blogger', '', '82.228.195.193');
+INSERT INTO investigo VALUES(24, 'true', 'x0rz', 'xvideos', '', '82.228.195.193');
+INSERT INTO investigo VALUES(25, 'true', 'x0rz', 'BLIP.fm', '', '82.228.195.193');
+INSERT INTO investigo VALUES(26, 'true', 'x0rz', 'Pornhub', '', '82.228.195.193');
+INSERT INTO investigo VALUES(27, 'true', 'x0rz', 'Archive.org', '', '82.228.195.193');
+INSERT INTO investigo VALUES(28, 'true', 'x0rz', '9GAG', '', '82.228.195.193');
+INSERT INTO investigo VALUES(29, 'true', 'x0rz', 'TikTok', '', '82.228.195.193');
+INSERT INTO investigo VALUES(30, 'true', 'x0rz', 'Spotify', '', '82.228.195.193');
+INSERT INTO investigo VALUES(31, 'true', 'x0rz', 'HackerOne', '', '82.228.195.193');
+INSERT INTO investigo VALUES(32, 'true', 'x0rz', 'TripAdvisor', '', '82.228.195.193');
+INSERT INTO investigo VALUES(33, 'true', 'x0rz', 'Flipboard', '', '82.228.195.193');
+INSERT INTO investigo VALUES(34, 'true', 'x0rz', 'Docker Hub', '', '82.228.195.193');
+INSERT INTO investigo VALUES(35, 'true', 'x0rz', 'VirusTotal', '', '82.228.195.193');
+INSERT INTO investigo VALUES(36, 'true', 'x0rz', 'HackerNews', '', '82.228.195.193');
+INSERT INTO investigo VALUES(37, 'true', 'x0rz', 'BuyMeACoffee', '', '82.228.195.193');
+INSERT INTO investigo VALUES(38, 'true', 'x0rz', 'Twitter', '', '82.228.195.193');
+INSERT INTO investigo VALUES(39, 'true', 'x0rz', 'Roblox', '', '82.228.195.193');
+INSERT INTO investigo VALUES(40, 'true', 'x0rz', 'Pixabay', '', '82.228.195.193');
+INSERT INTO investigo VALUES(41, 'true', 'x0rz', 'DeviantART', '', '82.228.195.193');
+INSERT INTO investigo VALUES(42, 'true', 'x0rz', 'last.fm', '', '82.228.195.193');
+INSERT INTO investigo VALUES(43, 'true', 'x0rz', 'Gitee', '', '82.228.195.193');
+
+COMMIT;

@@ -17,6 +17,7 @@ type Options struct {
 	WithAdmin       bool
 	WithExport      string
 	WithFormatAll   bool
+	WithHttpCache   bool
 	WithFormat      string
 	Verbose         bool
 	CheckForUpdate  bool
@@ -38,6 +39,22 @@ type Config struct {
 	}
 	// SiteData []SiteData
 }
+
+/*
+// WriteConfig writes the configuration information
+func (cfg *Config) WriteConfig() error {
+	err := os.MkdirAll(configDirectoryPath, 0700)
+	if err != nil {
+		return err
+	}
+
+	data, err := yaml.Marshal(cfg)
+	if err != nil {
+		return err
+	}
+	return ioutil.WriteFile(configFilePath(), data, 0600)
+}
+*/
 
 func init() {
 	baseDir, err := xdgbasedir.ConfigHomeDirectory()

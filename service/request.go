@@ -6,6 +6,8 @@ import (
 	"net/url"
 	"time"
 
+	"github.com/gregjones/httpcache"
+	"github.com/gregjones/httpcache/diskcache"
 	"github.com/kamilsk/breaker"
 	"github.com/kamilsk/retry"
 	"github.com/kamilsk/retry/strategy"
@@ -31,6 +33,13 @@ func Request(target string, options config.Options) (*http.Response, model.Reque
 	request.Header.Set("User-Agent", config.UserAgent)
 
 	client := &http.Client{}
+
+	if options.WithHttpCache {
+		dc := diskcache.New("data/cache/http")
+		t := httpcache.NewTransport(dc)
+		client.Transport = t
+	}
+
 	// client.CheckRedirect = func(req *http.Request, via []*http.Request) error {
 	//	return errors.New("Redirect")
 	// }
