@@ -35,4 +35,4 @@ shared
 .vscode/settings.json
 .vscode/launch.json
 .DS_Store
-#/data/
+/data/
