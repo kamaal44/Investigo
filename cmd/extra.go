@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"github.com/lucmski/Investigo/model"
+	//"github.com/lucmski/Investigo/service"
 )
 
 // Initialize sites not included in Sherlock
@@ -22,3 +23,7 @@ func initializeExtraSiteData() {
 		URL:       "https://xvideos.com/profiles/{}",
 	}
 }
+
+// "https://api.ipify.org"
+// https://www.ipify.org/
+//

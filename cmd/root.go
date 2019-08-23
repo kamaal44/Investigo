@@ -22,6 +22,7 @@ import (
 var options config.Options
 var configuration *config.Config
 var DB *gorm.DB
+var requestIP string
 
 //
 var DBook *tablib.Databook
@@ -52,8 +53,8 @@ var RootCmd = &cobra.Command{
 	Version: config.Version,
 	Run: func(cmd *cobra.Command, args []string) {
 		if len(args) > 0 {
-			query := args[0]
-			pp.Println("usernames: ", query)
+			// query := args[0]
+			// pp.Println("usernames: ", query)
 		} else {
 			log.Fatal("You must specify a username at least...")
 		}
@@ -79,10 +80,16 @@ var RootCmd = &cobra.Command{
 			DBook = tablib.NewDatabook()
 		}
 
+		requestIP = getContent("https://api.ipify.org")
+		options.RequestIP = requestIP
+		if options.WithTor {
+			pp.Println("Proxy IP: ", requestIP)
+		}
+
 		for _, username := range args {
 			var output *tablib.Dataset
 			if options.WithExport != "" {
-				output = tablib.NewDataset([]string{"Status", "Username", "Site", "Info"})
+				output = tablib.NewDataset([]string{"Status", "Username", "Site", "Info", "RequestIP"})
 			}
 			if options.NoColor {
 				fmt.Printf("Investigating %s on:\n", username)
@@ -95,12 +102,10 @@ var RootCmd = &cobra.Command{
 				go func(site string) {
 					defer waitGroup.Done()
 					res := service.Lookup(username, site, siteData[site], options)
-					//if !options.withExport {
 					WriteResult(res)
-					//}
 					if options.WithExport != "" {
 						if res.Exist || res.Err {
-							output.AppendValues(res.Exist, username, site, res.ErrMsg)
+							output.AppendValues(res.Exist, username, site, res.ErrMsg, requestIP)
 						}
 					}
 					<-guard
@@ -114,8 +119,9 @@ var RootCmd = &cobra.Command{
 		if options.WithExport != "" {
 			// fmt.Println(DBook.YAML())
 			for name := range DBook.Sheets() {
-				ods := DBook.Sheet(name).Dataset().Tabular("markdown" /* tablib.TabularMarkdown */)
+				ods := DBook.Sheet(name).Dataset().Tabular("grid" /* tablib.TabularMarkdown */)
 				fmt.Println(ods)
+				// save to file
 			}
 		}
 		if options.WithAdmin {
@@ -179,13 +185,27 @@ func Execute() {
 	}
 }
 
+// https://github.com/gjbae1212/go-module/tree/master/ip
+// https://github.com/twexler/gd-ddns-client/blob/master/ipifyapi.go
+func getContent(url string) string {
+	r, err := service.Request(url, options)
+	if err != nil || r.StatusCode != 200 {
+		fmt.Println("errpr:", err)
+		panic("Failed to connect to Investigo repository.")
+	} else {
+		defer r.Body.Close()
+	}
+	// pp.Println(service.ReadResponseBody(r))
+	return service.ReadResponseBody(r)
+}
+
 func init() {
 	flags := RootCmd.PersistentFlags()
 	flags.BoolVarP(&options.NoColor, "no-color", "n", false, "no color")
 	flags.BoolVarP(&options.WithTor, "tor", "t", false, "use tor proxy")
 	flags.StringVarP(&options.WithTorAddress, "tor-address", "p", "", "use tor proxy")
 	flags.StringVarP(&options.WithExport, "export", "e", "exportfile", "export file base name")
-	flags.StringVarP(&options.WithFormat, "format", "f", "yaml", "export format")
+	flags.StringVarP(&options.WithFormat, "format", "f", "yaml", "export format (available: JSON, YAML, CSV, TSV, XLSX, Markdown, Postgres, MySQL.")
 	flags.BoolVarP(&options.WithAdmin, "webui", "i", false, "webui interface")
 	flags.BoolVarP(&options.CheckForUpdate, "update", "u", false, "check for updates")
 	flags.BoolVarP(&options.Verbose, "verbose", "v", false, "verbose output")

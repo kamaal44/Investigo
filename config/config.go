@@ -19,6 +19,7 @@ type Options struct {
 	WithFormat      string
 	Verbose         bool
 	CheckForUpdate  bool
+	RequestIP       string
 }
 
 // test configor for extra rules
