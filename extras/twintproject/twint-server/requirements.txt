@@ -1,0 +1,6 @@
+flask
+flask-cors
+Celery
+twint
+numpy
+aiohttp_socks
